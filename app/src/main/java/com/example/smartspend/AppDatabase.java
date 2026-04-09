@@ -11,6 +11,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // Підключаємо наш DAO
     public abstract CategoryDao categoryDao();
+    public abstract TransactionDao transactionDao();
+    public abstract BudgetDao budgetDao();
+    public abstract BalanceDao balanceDao();
 
     private static volatile AppDatabase INSTANCE;
 
