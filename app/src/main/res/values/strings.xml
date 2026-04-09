@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Smart Spend</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="History">Історія</string>
+    <string name="Limits">Ліміти</string>
+    <string name="Savings">Скарбничка</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_is_dashboard">This is Dashboard</string>
+    <string name="this_is_history">This is history</string>
+    <string name="this_is_limits">This is limits</string>
+    <string name="this_is_savings">This is savings</string>
 </resources>
