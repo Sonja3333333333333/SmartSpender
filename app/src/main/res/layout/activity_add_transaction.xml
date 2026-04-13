@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginBottom="24dp">
+
+            <Button
+                android:id="@+id/btnTypeExpense"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/type_expense"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:backgroundTint="#4A86F7"
+                android:layout_marginEnd="4dp"
+                app:cornerRadius="20dp" />
+
+            <Button
+                android:id="@+id/btnTypeIncome"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/type_income"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:backgroundTint="#F0F0F0"
+                android:layout_marginEnd="4dp"
+                app:cornerRadius="20dp" />
+
+            <Button
+                android:id="@+id/btnTypeSavings"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/type_savings"
+                android:textAllCaps="false"
+                android:textSize="11sp"
+                android:textColor="#666666"
+                android:backgroundTint="#F0F0F0"
+                app:cornerRadius="20dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_amount"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputAmount"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_amount"
+            android:inputType="numberDecimal"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/errorAmountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сума не може бути від'ємною"
+            android:textColor="#FF0000"
+            android:textSize="12sp"
+            android:layout_marginTop="-12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_date"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_date"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:focusable="false"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/errorDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Встановіть дату"
+            android:textColor="#FF0000"
+            android:textSize="12sp"
+            android:layout_marginTop="-12dp"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_comment"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputComment"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_comment"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp" />
+    <LinearLayout
+        android:id="@+id/categoryContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_categories"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp" />
+
+        <GridLayout
+            android:id="@+id/categoryGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:padding="4dp">
+
+            <Button
+                android:id="@+id/cat_products"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_products"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_cafe"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_cafe"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_transport"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_transport"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="11sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_utility"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_utility"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_entertainment"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_entertainment"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_health"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_health"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_beauty"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_beauty"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="10sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_gift"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_gift"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="11sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_clothes"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_clothes"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_tech"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_tech"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/cat_other"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="65dp"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_margin="4dp"
+                android:text="@string/cat_other"
+                android:backgroundTint="#F0F0F0"
+                android:textColor="#000000"
+                android:textSize="12sp"
+                android:textAllCaps="false"/>
+        </GridLayout>
+    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="24dp">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="@string/action_cancel"
+                android:backgroundTint="#E0E0E0"
+                android:textColor="#333333"
+                android:layout_marginEnd="10dp" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="@string/action_add"
+                android:textAllCaps="false"
+                android:backgroundTint="#4A86F7"
+                app:rippleColor="#A1C4FD"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

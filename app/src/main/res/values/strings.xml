@@ -4,10 +4,46 @@
     <string name="History">Історія</string>
     <string name="Limits">Ліміти</string>
     <string name="Savings">Скарбничка</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="this_is_dashboard">This is Dashboard</string>
     <string name="this_is_history">This is history</string>
     <string name="this_is_limits">This is limits</string>
     <string name="this_is_savings">This is savings</string>
+
+    <string name="label_balance_title">Баланс коштів</string>
+    <string name="label_expenses">Витрати</string>
+
+    //вікно операції
+    <string name="type_expense">Витрати</string>
+    <string name="type_income">Доходи</string>
+    <string name="type_savings">Скарбничка</string>
+
+    <string name="label_amount">Сума</string>
+    <string name="label_date">Дата</string>
+    <string name="label_comment">Коментар</string>
+    <string name="label_categories">Категорії витрат</string>
+
+    //плейсхолдери
+    <string name="hint_amount">0.00 UAH</string>
+    <string name="hint_date">mm/dd/yyyy</string>
+    <string name="hint_comment">Додати коментар</string>
+
+    //категорії
+    <string name="cat_products">Продукти</string>
+    <string name="cat_cafe">Кафе/\nКава</string>
+    <string name="cat_transport">Транспорт/\nТаксі</string>
+    <string name="cat_utility">Комунальні\nпослуги</string>
+    <string name="cat_entertainment">Розваги</string>
+    <string name="cat_health">Здоров\'я</string>
+    <string name="cat_beauty">Краса та\nдогляд</string>
+    <string name="cat_gift">Подарунок</string>
+    <string name="cat_clothes">Одяг</string>
+    <string name="cat_tech">Техніка</string>
+    <string name="cat_other">Інше</string>
+
+    //кнопки
+    <string name="action_cancel">Скасувати</string>
+    <string name="action_add">Додати</string>
 </resources>
