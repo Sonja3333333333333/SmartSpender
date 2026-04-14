@@ -51,4 +51,7 @@ dependencies {
 
     // Додаткова підтримка Java для Room [cite: 10]
     implementation("androidx.room:room-common:$room_version")
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 }

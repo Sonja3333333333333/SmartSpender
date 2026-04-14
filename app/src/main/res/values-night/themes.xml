@@ -3,5 +3,10 @@
     <style name="Base.Theme.SmartSpend" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:fontFamily">sans-serif-medium</item>
+
+        <item name="android:windowBackground">@android:color/background_dark</item>
     </style>
+
+
 </resources>

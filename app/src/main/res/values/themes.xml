@@ -3,7 +3,21 @@
     <style name="Base.Theme.SmartSpend" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:fontFamily">@font/andika</item>
     </style>
 
     <style name="Theme.SmartSpend" parent="Base.Theme.SmartSpend" />
+
+    <style name="HeaderTextStyle">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item> </style>
+
+    <style name="BalanceTextStyle">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>
