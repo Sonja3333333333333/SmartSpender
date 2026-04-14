@@ -49,9 +49,6 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_savings) {
                 replaceFragment(new SavingsFragment());
                 return true;
-            } else if (id == R.id.nav_settings) {
-                replaceFragment(new SettingsFragment());
-                return true;
             }
             return false;
         });
