@@ -26,6 +26,7 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Тут ми ТІЛЬКИ "надуваємо" макет
         return inflater.inflate(R.layout.fragment_dashboard, container, false);
     }
 
@@ -33,55 +34,47 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // --- 1. Знаходимо всі елементи на екрані ---
         View pieChart = view.findViewById(R.id.pieChart);
         View balanceGroup = view.findViewById(R.id.balance_group);
         View emptyDataParent = view.findViewById(R.id.empty_data_parent);
+        ImageView btnAdd = view.findViewById(R.id.btn_add_transaction);
+        ImageView btnSettings = view.findViewById(R.id.btn_settings);
 
-        // умова для відображення плейсхолдера якщо нема даних для pie chart
-        boolean hasData = false;
+        // --- 2. Логіка порожнього екрану (від Наталі) ---
+        boolean hasData = false; // Поки що ставимо false, бо бази даних ще не підключені до графіка
 
         if (hasData) {
             pieChart.setVisibility(View.VISIBLE);
             balanceGroup.setVisibility(View.VISIBLE);
             emptyDataParent.setVisibility(View.GONE);
         } else {
-            // Ховаємо діаграму та баланс
+            // Ховаємо діаграму та баланс, показуємо плейсхолдер зі стрілкою
             pieChart.setVisibility(View.GONE);
             balanceGroup.setVisibility(View.GONE);
-
-            // Показуємо відразу весь блок з плейсхолдером, текстом і стрілкою
             emptyDataParent.setVisibility(View.VISIBLE);
         }
 
-        //кнопка додати операцію
-        ImageView btnAdd = view.findViewById(R.id.btn_add_transaction);
-
+        // --- 3. Кнопка Додати операцію (+) ---
         if (btnAdd != null) {
-            btnAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), AddTransactionActivity.class);
-                    startActivity(intent);
+            btnAdd.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), AddTransactionActivity.class);
+                startActivity(intent);
 
-                    if (getActivity() != null) {
-                        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                    }
+                if (getActivity() != null) {
+                    getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             });
         }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-        ImageView btnSettings = view.findViewById(R.id.btn_settings);
-
-        btnSettings.setOnClickListener(v -> {
-            getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new SettingsFragment())
-                    .addToBackStack(null)
-                    .commit();
-        });
-
-        return view;
+        // --- 4. Наша Шестірня (Налаштування) ---
+        if (btnSettings != null) {
+            btnSettings.setOnClickListener(v -> {
+                getParentFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new SettingsFragment())
+                        .addToBackStack(null) // Щоб працювала кнопка "Назад"
+                        .commit();
+            });
+        }
     }
 }

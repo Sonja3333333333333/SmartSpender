@@ -1,33 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="#F8F8F8"
     android:id="@+id/main_scroll">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="32dp"
         tools:context=".DashboardFragment">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_center"
+        <TextView
+            android:id="@+id/tv_month_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            android:layout_marginTop="24dp"
+            android:text="Березень"
+            android:textColor="#333333"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_prev_month"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Попередній місяць"
+            android:padding="12dp"
+            android:src="@drawable/arrow_left"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
+            app:layout_constraintEnd_toStartOf="@+id/tv_month_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
+
+        <ImageView
+            android:id="@+id/btn_next_month"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Наступний місяць"
+            android:padding="12dp"
+            android:src="@drawable/arrow_right"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
+            app:layout_constraintStart_toEndOf="@+id/tv_month_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
+
+        <ImageView
+            android:id="@+id/btn_settings"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Налаштування"
+            android:padding="12dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
 
         <View
             android:id="@+id/top_divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="85dp"
-            android:background="@color/black"
+            android:layout_marginTop="16dp"
+            android:background="#D9D9D9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_month_name" />
 
         <TextView
             android:id="@+id/tv_expenses_label"
@@ -36,59 +82,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:text="@string/label_expenses"
-            android:textColor="@color/black"
+            android:textColor="#333333"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_divider" />
-
-        <ImageView
-            android:id="@+id/btn_prev_month"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Попередній місяць"
-            android:padding="2dp"
-            android:src="@drawable/arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
-            app:layout_constraintEnd_toStartOf="@+id/tv_month_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
-
-        <TextView
-            android:id="@+id/tv_month_name"
-            style="@style/HeaderTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Квітень" />
-
-        <ImageView
-            android:id="@+id/btn_next_month"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="2dp"
-            android:src="@drawable/arrow_right"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
-            app:layout_constraintStart_toEndOf="@+id/tv_month_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_month_name"
-            android:contentDescription="Наступний місяць" />
-
-        <ImageView
-            android:id="@+id/btn_settings"
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Налаштування"
-            android:padding="10dp"
-            android:src="@drawable/menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart"
@@ -105,33 +103,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
+            android:layout_marginTop="16dp"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pieChart">
+            app:layout_constraintTop_toBottomOf="@+id/tv_expenses_label">
 
             <View
                 android:id="@+id/pie_placeholder_new"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:background="@drawable/circle_placeholder" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:text="Немає даних за цей місяць"
-                android:textColor="#80000000"
-                android:textSize="18sp" />
+                android:textColor="#999999"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/iv_empty_arrow_new"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 android:alpha="0.5"
-                android:rotation="50"
                 android:src="@drawable/curved_arrow" />
         </LinearLayout>
 
@@ -139,7 +137,7 @@
             android:id="@+id/balance_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -151,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_balance_title"
-                android:textColor="@color/black"
+                android:textColor="#5A5A5A"
                 android:textSize="16sp" />
 
             <TextView
@@ -160,72 +158,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:textColor="#333333"
                 tools:text="12 345.67 UAH" />
         </LinearLayout>
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_content_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="balance_group,empty_data_parent" />
+
         <ImageView
             android:id="@+id/btn_add_transaction"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="32dp"
+            android:contentDescription="Додати операцію"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/bg_add_button"
             android:clickable="true"
             android:elevation="6dp"
             android:focusable="true"
             android:padding="16dp"
             android:src="@drawable/add_icon"
-
-
-        app:layout_constraintTop_toBottomOf="@+id/empty_data_parent"
-
-
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-
-
-        app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/barrier_content_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F8F8F8"
-    android:padding="16dp">
-
-    <RelativeLayout
-        android:id="@+id/top_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="&lt; Березень &gt;"
-            android:textColor="#333333"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/btn_settings"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_settings" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Тут буде діаграма"
-        android:textColor="#999999"
-        android:textSize="16sp" />
-
-</RelativeLayout>
