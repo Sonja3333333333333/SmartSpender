@@ -1,8 +1,10 @@
-package com.example.smartspend;
+package com.example.smartspend.ui.activities;
 
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.smartspend.R;
 
 public class SpendSavingsActivity extends AppCompatActivity {
 

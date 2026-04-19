@@ -1,7 +1,6 @@
-package com.example.smartspend;
+package com.example.smartspend.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,11 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import java.util.ArrayList;
+import com.example.smartspend.R;
+import com.example.smartspend.ui.activities.AddTransactionActivity;
 
 public class DashboardFragment extends Fragment {
 

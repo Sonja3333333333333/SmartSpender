@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartSpend">
 
-        <activity android:name=".AddTransactionActivity"
+        <activity android:name=".ui.activities.AddTransactionActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".SpendSavingsActivity"
+            android:name=".ui.activities.SpendSavingsActivity"
             android:exported="false" />
 
         <meta-data

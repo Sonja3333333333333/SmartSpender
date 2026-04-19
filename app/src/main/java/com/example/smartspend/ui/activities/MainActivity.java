@@ -1,4 +1,4 @@
-package com.example.smartspend;
+package com.example.smartspend.ui.activities;
 
 import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
@@ -8,6 +8,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.smartspend.ui.fragment.DashboardFragment;
+import com.example.smartspend.ui.fragment.HistoryFragment;
+import com.example.smartspend.ui.fragment.LimitsFragment;
+import com.example.smartspend.R;
+import com.example.smartspend.ui.fragment.SavingsFragment;
+import com.example.smartspend.data.AppDatabase;
+import com.example.smartspend.data.entities.Balance;
+import com.example.smartspend.data.entities.Category;
+import com.example.smartspend.data.entities.Transaction_Log;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

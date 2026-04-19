@@ -1,4 +1,4 @@
-package com.example.smartspend;
+package com.example.smartspend.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import com.example.smartspend.R;
+import com.example.smartspend.data.AppDatabase;
 
 public class SettingsFragment extends Fragment {
 
