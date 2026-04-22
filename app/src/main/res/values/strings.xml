@@ -46,4 +46,6 @@
     //кнопки
     <string name="action_cancel">Скасувати</string>
     <string name="action_add">Додати</string>
+    <string name="back_button_text">&lt; Назад</string>
+
 </resources>

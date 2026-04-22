@@ -15,7 +15,7 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="&lt; Назад"
+            android:text="@string/back_button_text"
             android:textSize="14sp"
             android:textColor="#5A5A5A"
             android:textStyle="bold"
@@ -43,6 +43,46 @@
         android:layout_height="1dp"
         android:background="#D9D9D9"
         android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вибір теми"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp" />
+
+    <RadioGroup
+        android:id="@+id/themeRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="8dp"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/radioLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Світла тема"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Темна тема"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioSystem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Системна (за замовчуванням)"
+            android:textSize="16sp" />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,13 +132,18 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <Button
         android:id="@+id/btn_reset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:padding="12dp"
         android:text="Скинути застосунок"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:backgroundTint="#E53935" />
 
