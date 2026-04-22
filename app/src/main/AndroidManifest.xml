@@ -24,6 +24,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".TransactionDetailActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ui.activities.SpendSavingsActivity"
             android:exported="false" />

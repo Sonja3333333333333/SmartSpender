@@ -1,4 +1,4 @@
-package com.example.smartspend.data;
+package com.example.smartspend;
 
 import android.content.Context;
 import androidx.room.Database;
@@ -14,8 +14,8 @@ import com.example.smartspend.data.dao.CategoryDao;
 import com.example.smartspend.data.dao.TransactionDao;
 import com.example.smartspend.data.entities.Transaction_Log;
 
-// Вказуємо всі 4 наші таблиці [cite: 3, 5, 8, 10]
-@Database(entities = {Category.class, Transaction_Log.class, Budgets.class, Balance.class}, version = 1)
+// Вказуємо всі 4 наші таблиці
+@Database(entities = {Category.class, Transaction_Log.class, Budgets.class, Balance.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     // Підключаємо наш DAO
@@ -34,6 +34,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "smart_spend_db")
                             .allowMainThreadQueries() // Дозволяємо запити для тестування
+                            .fallbackToDestructiveMigration() // Захист від крашу при зміні таблиць
                             .build();
                 }
             }
