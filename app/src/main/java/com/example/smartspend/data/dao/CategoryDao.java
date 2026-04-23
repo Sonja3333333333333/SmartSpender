@@ -1,4 +1,4 @@
-package com.example.smartspend;
+package com.example.smartspend.data.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -21,4 +21,7 @@ public interface CategoryDao {
     // Метод для отримання категорії за її ID (з гілки main)
     @Query("SELECT * FROM Category WHERE id = :id")
     Category getCategoryById(int id);
+
+    @Query("SELECT id FROM Category WHERE name = :name LIMIT 1")
+    int getCategoryIdByName(String name);
 }

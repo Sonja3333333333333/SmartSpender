@@ -17,14 +17,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
     private List<Transaction_Log> transactionList;
-    private List<Category> categories; // Список для порівняння
+    private List<Category> categories;
+    private OnItemClickListener listener;
 
-    public HistoryAdapter(List<Transaction_Log> transactionList, List<Category> categories) {
-        this.transactionList = transactionList;
+    public interface OnItemClickListener {
+        void onItemClick(Transaction_Log transaction);
+    }
+
+    // Оновлений конструктор
+    public HistoryAdapter(List<Transaction_Log> transactions, List<Category> categories, OnItemClickListener listener) {
+        this.transactionList = transactions; // Присвоюємо саме в transactionList
         this.categories = categories;
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,6 +47,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Transaction_Log transaction = transactionList.get(position);
+
+        holder.itemView.setOnClickListener(v -> listener.onItemClick(transaction));
 
         // --- ЛОГІКА РОЗДІЛЮВАЧА ДАТИ ---
         SimpleDateFormat headerFormat = new SimpleDateFormat("d MMMM", new Locale("uk"));

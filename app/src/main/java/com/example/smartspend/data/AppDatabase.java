@@ -1,4 +1,4 @@
-package com.example.smartspend;
+package com.example.smartspend.data;
 
 import android.content.Context;
 import androidx.room.Database;
@@ -8,9 +8,9 @@ import androidx.room.RoomDatabase;
 import com.example.smartspend.data.entities.Balance;
 import com.example.smartspend.data.dao.BalanceDao;
 import com.example.smartspend.data.dao.BudgetDao;
+import com.example.smartspend.data.dao.CategoryDao;
 import com.example.smartspend.data.entities.Budgets;
 import com.example.smartspend.data.entities.Category;
-import com.example.smartspend.data.dao.CategoryDao;
 import com.example.smartspend.data.dao.TransactionDao;
 import com.example.smartspend.data.entities.Transaction_Log;
 

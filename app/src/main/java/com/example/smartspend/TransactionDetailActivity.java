@@ -1,17 +1,23 @@
 package com.example.smartspend;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.smartspend.data.AppDatabase; // Перевір, щоб імпорт бази був правильним
+import com.example.smartspend.data.entities.Transaction_Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
-    private TextView tvType, tvDate, tvCategory, tvComment, tvAmount;
+    // ВИДАЛИЛИ tvType звідси
+    private TextView tvDate, tvCategory, tvComment, tvAmount;
     private AppDatabase db;
     private int transactionId;
 
@@ -20,8 +26,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_details);
 
-        // Ініціалізація View з вашого XML
-        tvType = findViewById(R.id.tvDetailType);
+        // Ініціалізація View з вашого нового XML (без tvDetailType)
         tvDate = findViewById(R.id.tvDetailDate);
         tvCategory = findViewById(R.id.tvDetailCategory);
         tvComment = findViewById(R.id.tvDetailComment);
@@ -35,7 +40,6 @@ public class TransactionDetailActivity extends AppCompatActivity {
         }
 
         findViewById(R.id.btnBackToHistory).setOnClickListener(v -> finish());
-
         findViewById(R.id.btnDeleteTransaction).setOnClickListener(v -> deleteTransaction());
     }
 
@@ -45,11 +49,30 @@ public class TransactionDetailActivity extends AppCompatActivity {
             Transaction_Log transaction = db.transactionDao().getTransactionById(transactionId);
             if (transaction != null) {
                 runOnUiThread(() -> {
-                    tvType.setText("Тип: " + transaction.type);
-                    tvDate.setText("Дата: " + transaction.date);
-                    // ВИПРАВЛЕНО: .sum замість .amount
-                    tvAmount.setText("Сума: " + transaction.sum + " UAH");
-                    tvComment.setText("Коментар: " + (transaction.comment != null ? transaction.comment : ""));
+
+                    // 1. Форматуємо тип і суму в один рядок (як на макеті)
+                    String typeText = "";
+                    if ("income".equals(transaction.type)) {
+                        typeText = String.format(Locale.getDefault(), "Дохід: +%.2f UAH", transaction.sum);
+                        tvAmount.setTextColor(android.graphics.Color.parseColor("#4CAF50")); // Зелений
+                    } else if ("savings".equals(transaction.type)) {
+                        typeText = String.format(Locale.getDefault(), "Скарбничка: -%.2f UAH", transaction.sum);
+                        tvAmount.setTextColor(android.graphics.Color.parseColor("#2196F3")); // Синій
+                    } else {
+                        typeText = String.format(Locale.getDefault(), "Витрата: -%.2f UAH", transaction.sum);
+                        tvAmount.setTextColor(android.graphics.Color.parseColor("#E53935")); // Червоний
+                    }
+                    tvAmount.setText(typeText);
+
+                    // 2. Форматуємо дату (щоб були не мілісекунди, а нормальна дата)
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", new Locale("uk"));
+                    tvDate.setText(sdf.format(new Date(transaction.date)));
+
+                    // 3. Коментар
+                    tvComment.setText(transaction.comment != null && !transaction.comment.isEmpty() ? transaction.comment : "Немає коментаря");
+
+                    // Поки що ховаємо категорію, якщо її складно витягнути (або можеш дописати логіку)
+                    // tvCategory.setText("...");
                 });
             }
         });

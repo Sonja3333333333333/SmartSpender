@@ -72,7 +72,18 @@ public class HistoryFragment extends Fragment {
     }
 
     private void setupRecyclerView() {
-        adapter = new HistoryAdapter(new ArrayList<>(), new ArrayList<>());
+        // Тепер ми передаємо третім параметром логіку кліку
+        adapter = new HistoryAdapter(new ArrayList<>(), new ArrayList<>(), transaction -> {
+
+            // Створюємо "квиток" на перехід до іншої сторінки
+            android.content.Intent intent = new android.content.Intent(getContext(), com.example.smartspend.TransactionDetailActivity.class);
+
+            // Передаємо ID транзакції, щоб на тій сторінці знати, що показувати
+            intent.putExtra("TRANSACTION_ID", transaction.id);
+
+            startActivity(intent);
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
     }

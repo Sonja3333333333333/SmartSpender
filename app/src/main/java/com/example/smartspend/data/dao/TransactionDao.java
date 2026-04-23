@@ -1,4 +1,4 @@
-package com.example.smartspend.data.dao;
+package com.example.smartspend.data.dao; // ВИПРАВЛЕНО: правильна папка
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+// ДОДАНО: імпорт таблиці транзакцій, бо вона тепер в іншій папці
 import com.example.smartspend.data.entities.Transaction_Log;
 
 import java.util.List;
@@ -17,23 +18,29 @@ public interface TransactionDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Transaction_Log transaction);
 
-    // Отримання конкретної транзакції за її ID (для вікна деталей)
-    @Query("SELECT * FROM Transaction_Log WHERE id = :id")
-    Transaction_Log getTransactionById(int id);
+    // Видалення всіх транзакцій (очищення бази)
+    @Query("DELETE FROM Transaction_Log")
+    void deleteAllTransactions();
 
-    // Отримання всіх транзакцій, відсортованих від нових до старих (для списку історії)
-    @Query("SELECT * FROM Transaction_Log ORDER BY date DESC")
-    List<Transaction_Log> getAllTransactions();
+    // МЕТОД ДЛЯ ДАШБОРДУ: Отримуємо всі операції за вибраний період
+    @Query("SELECT * FROM Transaction_Log WHERE date >= :startOfMonth AND date <= :endOfMonth ORDER BY date DESC")
+    List<Transaction_Log> getTransactionsForPeriod(long startOfMonth, long endOfMonth);
 
-    // Отримання транзакцій за конкретний період/місяць (твоя логіка з history)
+    // МЕТОД ДЛЯ ІСТОРІЇ: Працює так само, але називається інакше (щоб історія не зламалася)
     @Query("SELECT * FROM Transaction_Log WHERE date >= :startDate AND date <= :endDate ORDER BY date DESC")
     List<Transaction_Log> getTransactionsByMonth(long startDate, long endDate);
+
+    // --- МЕТОДИ ДЛЯ ЕКРАНУ ДЕТАЛЕЙ (щоб кнопки "Редагувати" і "Видалити" працювали) ---
+
+    // Отримання конкретної транзакції за її ID
+    @Query("SELECT * FROM Transaction_Log WHERE id = :id")
+    Transaction_Log getTransactionById(int id);
 
     // Видалення конкретної транзакції
     @Delete
     void delete(Transaction_Log transaction);
 
-    // Видалення всіх транзакцій (наприклад, для очищення даних)
-    @Query("DELETE FROM Transaction_Log")
-    void deleteAllTransactions();
+    // Отримання взагалі всіх транзакцій (про всяк випадок)
+    @Query("SELECT * FROM Transaction_Log ORDER BY date DESC")
+    List<Transaction_Log> getAllTransactions();
 }
