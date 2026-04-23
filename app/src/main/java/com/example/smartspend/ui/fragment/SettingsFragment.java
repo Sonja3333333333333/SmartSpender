@@ -1,4 +1,4 @@
-package com.example.smartspend;
+package com.example.smartspend.ui.fragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,6 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+
+import com.example.smartspend.R;
+import com.example.smartspend.data.AppDatabase;
 
 public class SettingsFragment extends Fragment {
 

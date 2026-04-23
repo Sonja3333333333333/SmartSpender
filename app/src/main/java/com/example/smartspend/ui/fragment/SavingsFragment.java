@@ -1,4 +1,4 @@
-package com.example.smartspend;
+package com.example.smartspend.ui.fragment;
 
 import android.os.Bundle;
 
@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.smartspend.R;
+import com.example.smartspend.data.AppDatabase;
+import com.example.smartspend.data.entities.Balance;
+import com.example.smartspend.ui.activities.SpendSavingsActivity;
 
 public class SavingsFragment extends Fragment {
 

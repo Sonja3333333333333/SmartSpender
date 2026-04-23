@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_blue">#0056D2</color>
     <color name="light_blue">#3A76EF</color>
+    <color name="light_gray">#A09D9D</color>
+    <color name="red_expense">#F83131</color>
+    <color name="green_income">#4CAF50</color>
+    <color name="blue_savings">#52ACF2</color>
 </resources>

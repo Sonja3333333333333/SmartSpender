@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="32dp"
-        tools:context=".DashboardFragment">
+        tools:context=".ui.fragment.DashboardFragment">
 
         <TextView
             android:id="@+id/tv_month_name"
