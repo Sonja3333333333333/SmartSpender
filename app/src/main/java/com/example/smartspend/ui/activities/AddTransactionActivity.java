@@ -189,7 +189,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             typeStr = "income";
         } else if (currentType == 2) {
             typeStr = "savings";
-            isFromSavings = 1;
+            isFromSavings = 0;
         } else {
             typeStr = "expense";
         }

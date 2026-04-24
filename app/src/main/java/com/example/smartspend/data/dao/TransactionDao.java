@@ -43,4 +43,10 @@ public interface TransactionDao {
     // Отримання взагалі всіх транзакцій (про всяк випадок)
     @Query("SELECT * FROM Transaction_Log ORDER BY date DESC")
     List<Transaction_Log> getAllTransactions();
+
+    @Query("SELECT " +
+            "TOTAL(CASE WHEN type = 'savings' THEN sum ELSE 0 END) - " +
+            "TOTAL(CASE WHEN is_from_savings = 1 THEN sum ELSE 0 END) " +
+            "FROM Transaction_Log")
+    double getSavingsBalance();
 }
