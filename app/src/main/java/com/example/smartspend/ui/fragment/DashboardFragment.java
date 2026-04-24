@@ -176,17 +176,23 @@ public class DashboardFragment extends Fragment {
 
             if (isAdded() && getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
-                    tvBalanceAmount.setText(String.format("%.2f ₴", finalBalance));
+                    tvBalanceAmount.setText(String.format(java.util.Locale.getDefault(), "%.2f ₴", finalBalance));
 
-                    if (expenseByCategory.isEmpty()) {
+                    if (currentMonthTransactions == null || currentMonthTransactions.isEmpty()) {
+                        // Якщо взагалі нічого немає за місяць — ховаємо все
                         pieChart.setVisibility(View.GONE);
                         balanceGroup.setVisibility(View.GONE);
                         emptyDataParent.setVisibility(View.VISIBLE);
                     } else {
-                        pieChart.setVisibility(View.VISIBLE);
                         balanceGroup.setVisibility(View.VISIBLE);
                         emptyDataParent.setVisibility(View.GONE);
-                        setupPieChart(expenseByCategory);
+
+                        if (expenseByCategory.isEmpty()) {
+                            pieChart.setVisibility(View.GONE);
+                        } else {
+                            pieChart.setVisibility(View.VISIBLE);
+                            setupPieChart(expenseByCategory);
+                        }
                     }
                 });
             }

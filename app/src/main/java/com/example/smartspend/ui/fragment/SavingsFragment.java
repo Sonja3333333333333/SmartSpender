@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.smartspend.R;
 import com.example.smartspend.data.AppDatabase;
-import com.example.smartspend.data.entities.Balance;
 import com.example.smartspend.ui.activities.SpendSavingsActivity;
 
 import java.util.Locale;
@@ -23,7 +22,7 @@ public class SavingsFragment extends Fragment {
     private TextView tvSavingsAmount;
 
     public SavingsFragment(){
-
+        // Required empty public constructor
     }
 
     @Override
@@ -36,7 +35,6 @@ public class SavingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         tvSavingsAmount = view.findViewById(R.id.tv_savings_amount);
-
         Button btnSpend = view.findViewById(R.id.btn_spend_savings);
 
         btnSpend.setOnClickListener(v ->{
@@ -48,44 +46,20 @@ public class SavingsFragment extends Fragment {
             }
         });
 
-        loadSavingsBalance();
+        // Видалили виклик старого методу, бо onResume і так оновить баланс
     }
 
-    private void loadSavingsBalance(){
-        AppDatabase db = AppDatabase.getInstance(requireContext());
-
-        new Thread(() ->{
-            try{
-                Balance savings = db.balanceDao().getBalanceByType(2);
-
-                double amount = (savings != null) ? savings.balance : 0.0;
-
-                String formattedBalance = String.format("%.2f UAH", amount);
-
-                requireActivity().runOnUiThread(() -> {
-                    tvSavingsAmount.setText(formattedBalance);
-                });
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }).start();
-    }
-
-    // Усередині SavingsFragment.java
-
+    // НОВИЙ ПРАВИЛЬНИЙ МЕТОД
     private void updateSavingsBalance() {
         AppDatabase db = AppDatabase.getInstance(requireContext());
         new Thread(() -> {
-            // Отримуємо баланс із бази даних
+            // Отримуємо баланс із бази даних через транзакції
             double balance = db.transactionDao().getSavingsBalance();
 
             if (isAdded() && getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
-                    // tvSavingsAmount — це ID твого TextView для суми в XML
-                    TextView tvAmount = getView().findViewById(R.id.tv_savings_amount);
-                    if (tvAmount != null) {
-                        tvAmount.setText(String.format(Locale.getDefault(), "%.2f UAH", balance));
+                    if (tvSavingsAmount != null) {
+                        tvSavingsAmount.setText(String.format(Locale.getDefault(), "%.2f ₴", balance));
                     }
                 });
             }
@@ -95,6 +69,7 @@ public class SavingsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        // Оновлюємо баланс щоразу, коли користувач відкриває цю вкладку
         updateSavingsBalance();
     }
 }
