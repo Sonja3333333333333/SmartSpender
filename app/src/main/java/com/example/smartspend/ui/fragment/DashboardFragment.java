@@ -166,6 +166,9 @@ public class DashboardFragment extends Fragment {
                         }
                         expenseByCategory.put(catName, currentCatSum + transaction.sum);
                     }
+                    else if ("savings".equals(transaction.type)) {
+                        totalExpense += transaction.sum;
+                    }
                 }
             }
 

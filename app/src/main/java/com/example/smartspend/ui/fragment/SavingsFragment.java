@@ -16,6 +16,8 @@ import com.example.smartspend.data.AppDatabase;
 import com.example.smartspend.data.entities.Balance;
 import com.example.smartspend.ui.activities.SpendSavingsActivity;
 
+import java.util.Locale;
+
 public class SavingsFragment extends Fragment {
 
     private TextView tvSavingsAmount;
@@ -70,7 +72,29 @@ public class SavingsFragment extends Fragment {
         }).start();
     }
 
+    // Усередині SavingsFragment.java
 
+    private void updateSavingsBalance() {
+        AppDatabase db = AppDatabase.getInstance(requireContext());
+        new Thread(() -> {
+            // Отримуємо баланс із бази даних
+            double balance = db.transactionDao().getSavingsBalance();
 
+            if (isAdded() && getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    // tvSavingsAmount — це ID твого TextView для суми в XML
+                    TextView tvAmount = getView().findViewById(R.id.tv_savings_amount);
+                    if (tvAmount != null) {
+                        tvAmount.setText(String.format(Locale.getDefault(), "%.2f UAH", balance));
+                    }
+                });
+            }
+        }).start();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateSavingsBalance();
+    }
 }
