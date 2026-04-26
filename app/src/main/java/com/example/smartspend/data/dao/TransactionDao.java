@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 // ДОДАНО: імпорт таблиці транзакцій, бо вона тепер в іншій папці
 import com.example.smartspend.data.entities.Transaction_Log;
@@ -49,4 +50,7 @@ public interface TransactionDao {
             "TOTAL(CASE WHEN is_from_savings = 1 THEN sum ELSE 0 END) " +
             "FROM Transaction_Log")
     double getSavingsBalance();
+
+    @Update
+    void update(Transaction_Log transaction);
 }

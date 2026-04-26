@@ -1,5 +1,6 @@
 package com.example.smartspend.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +26,9 @@ public class SpendSavingsActivity extends AppCompatActivity {
     private AppDatabase db;
     private List<Category> categoryList = new ArrayList<>();
 
+    private int editTransactionId = -1;
+    private Transaction_Log transactionToEdit = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,30 @@ public class SpendSavingsActivity extends AppCompatActivity {
         if (btnConfirm != null) {
             btnConfirm.setOnClickListener(v -> saveSavingsExpense());
         }
+
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("EDIT_TRANSACTION_ID")) {
+            editTransactionId = intent.getIntExtra("EDIT_TRANSACTION_ID", -1);
+            if (editTransactionId != -1) {
+                if (btnConfirm != null) {
+                    btnConfirm.setText("Зберегти зміни");
+                }
+                loadTransactionData();
+            }
+        }
+    }
+
+    private void loadTransactionData() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            transactionToEdit = db.transactionDao().getTransactionById(editTransactionId);
+            if (transactionToEdit != null) {
+                runOnUiThread(() -> {
+                    etAmount.setText(String.valueOf(transactionToEdit.sum));
+                    setSpinnerSelection();
+                });
+            }
+        });
     }
 
     private void loadCategories() {
@@ -70,8 +98,22 @@ public class SpendSavingsActivity extends AppCompatActivity {
                 );
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerCategory.setAdapter(adapter);
+
+                // РЕДАГУВАННЯ: Якщо транзакція вже завантажилась, вибираємо категорію
+                setSpinnerSelection();
             });
         });
+    }
+
+    private void setSpinnerSelection() {
+        if (transactionToEdit != null && !categoryList.isEmpty() && transactionToEdit.category_id != null) {
+            for (int i = 0; i < categoryList.size(); i++) {
+                if (categoryList.get(i).id == transactionToEdit.category_id) {
+                    spinnerCategory.setSelection(i);
+                    break;
+                }
+            }
+        }
     }
 
     private void saveSavingsExpense() {
@@ -106,20 +148,28 @@ public class SpendSavingsActivity extends AppCompatActivity {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            Transaction_Log transaction = new Transaction_Log();
-            transaction.sum = finalAmount;
+            if (editTransactionId != -1 && transactionToEdit != null) {
+                // ОНОВЛЕННЯ СТАРОЇ
+                transactionToEdit.sum = finalAmount;
+                transactionToEdit.category_id = finalCatId;
 
-            transaction.type = "expense";
-            transaction.is_from_savings = 1;
+                db.transactionDao().update(transactionToEdit);
+            } else {
+                // СТВОРЕННЯ НОВОЇ
+                Transaction_Log transaction = new Transaction_Log();
+                transaction.sum = finalAmount;
+                transaction.type = "expense";
+                transaction.is_from_savings = 1;
+                transaction.date = System.currentTimeMillis();
+                transaction.category_id = finalCatId;
+                transaction.comment = "Витрата зі скарбнички";
 
-            transaction.date = System.currentTimeMillis();
-            transaction.category_id = finalCatId;
-            transaction.comment = "Витрата зі скарбнички";
-
-            db.transactionDao().insert(transaction);
+                db.transactionDao().insert(transaction);
+            }
 
             runOnUiThread(() -> {
-                Toast.makeText(this, "Витрату зі скарбнички успішно збережено!", Toast.LENGTH_SHORT).show();
+                String message = (editTransactionId != -1) ? "Зміни збережено!" : "Витрату зі скарбнички успішно збережено!";
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                 finish();
             });
         });
