@@ -88,6 +88,12 @@ public class HistoryFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadDataFromDatabase();
+    }
+
     private void loadDataFromDatabase() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, currentMonthOffset); // Додаємо зсув місяця
