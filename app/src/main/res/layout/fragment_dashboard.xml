@@ -1,188 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
     android:background="#F8F8F8"
-    android:id="@+id/main_scroll">
+    tools:context=".ui.fragment.DashboardFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_month_name"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="32dp"
-        tools:context=".ui.fragment.DashboardFragment">
+        android:layout_marginTop="24dp"
+        android:text="Березень"
+        android:textColor="#333333"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_month_name"
-            android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/btn_prev_month"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Попередній місяць"
+        android:padding="12dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
+        app:layout_constraintEnd_toStartOf="@+id/tv_month_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
+
+    <ImageView
+        android:id="@+id/btn_next_month"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Наступний місяць"
+        android:padding="12dp"
+        android:src="@drawable/arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
+        app:layout_constraintStart_toEndOf="@+id/tv_month_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
+
+    <ImageView
+        android:id="@+id/btn_settings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Налаштування"
+        android:padding="12dp"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
+
+    <View
+        android:id="@+id/top_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#D9D9D9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_month_name" />
+
+    <ScrollView
+        android:id="@+id/main_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_divider">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Березень"
-            android:textColor="#333333"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/btn_prev_month"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Попередній місяць"
-            android:padding="12dp"
-            android:src="@drawable/arrow_left"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
-            app:layout_constraintEnd_toStartOf="@+id/tv_month_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
-
-        <ImageView
-            android:id="@+id/btn_next_month"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Наступний місяць"
-            android:padding="12dp"
-            android:src="@drawable/arrow_right"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
-            app:layout_constraintStart_toEndOf="@+id/tv_month_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
-
-        <ImageView
-            android:id="@+id/btn_settings"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Налаштування"
-            android:padding="12dp"
-            android:src="@drawable/ic_settings"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_month_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_month_name" />
-
-        <View
-            android:id="@+id/top_divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="#D9D9D9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_month_name" />
-
-        <TextView
-            android:id="@+id/tv_expenses_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#333333"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_divider" />
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/pieChart"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_expenses_label" />
-
-        <LinearLayout
-            android:id="@+id/empty_data_parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-            tools:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_expenses_label">
-
-            <View
-                android:id="@+id/pie_placeholder_new"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/circle_placeholder" />
+            android:paddingBottom="32dp">
 
             <TextView
+                android:id="@+id/tv_expenses_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
-                android:text="Немає даних за цей місяць"
-                android:textColor="#999999"
-                android:textSize="16sp" />
+                android:textColor="#333333"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pieChart"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_expenses_label" />
+
+            <LinearLayout
+                android:id="@+id/empty_data_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_expenses_label">
+
+                <View
+                    android:id="@+id/pie_placeholder_new"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/circle_placeholder" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Немає даних за цей місяць"
+                    android:textColor="#999999"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_empty_arrow_new"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/curved_arrow" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/balance_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pieChart">
+
+                <TextView
+                    android:id="@+id/tv_balance_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_balance_title"
+                    android:textColor="#5A5A5A"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_balance_amount"
+                    style="@style/BalanceTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#333333"
+                    tools:text="12 345.67 UAH" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_content_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="balance_group,empty_data_parent" />
 
             <ImageView
-                android:id="@+id/iv_empty_arrow_new"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="10dp"
-                android:alpha="0.5"
-                android:src="@drawable/curved_arrow" />
-        </LinearLayout>
+                android:id="@+id/btn_add_transaction"
+                android:contentDescription="Додати операцію"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/bg_add_button"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:focusable="true"
+                android:padding="16dp"
+                android:src="@drawable/add_icon"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_content_bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/balance_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pieChart">
-
-            <TextView
-                android:id="@+id/tv_balance_title"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_legend"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_balance_title"
-                android:textColor="#5A5A5A"
-                android:textSize="16sp" />
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@+id/btn_add_transaction"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_balance_amount"
-                style="@style/BalanceTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#333333"
-                tools:text="12 345.67 UAH" />
-        </LinearLayout>
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_content_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="balance_group,empty_data_parent" />
-
-        <ImageView
-            android:id="@+id/btn_add_transaction"
-            android:contentDescription="Додати операцію"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/bg_add_button"
-            android:clickable="true"
-            android:elevation="6dp"
-            android:focusable="true"
-            android:padding="16dp"
-            android:src="@drawable/add_icon"
-            app:layout_constraintTop_toBottomOf="@+id/barrier_content_bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,6 +27,7 @@ import java.util.List;
 public class AddTransactionActivity extends AppCompatActivity {
 
     private int currentType = 0; // 0 - витрати, 1 - доходи, 2 - скарбничка
+    private long selectedDateMillis = System.currentTimeMillis();
     private Button btnTypeExpense, btnTypeIncome, btnTypeSavings, btnSave;
     private View categoryContainer;
     private List<Button> categoryButtons = new ArrayList<>();
@@ -119,7 +120,8 @@ public class AddTransactionActivity extends AppCompatActivity {
         int[] catIds = {
                 R.id.cat_products, R.id.cat_cafe, R.id.cat_transport,
                 R.id.cat_utility, R.id.cat_entertainment, R.id.cat_health,
-                R.id.cat_beauty, R.id.cat_gift, R.id.cat_clothes
+                R.id.cat_beauty, R.id.cat_gift, R.id.cat_clothes,
+                R.id.cat_tech, R.id.cat_other
         };
 
         for (int id : catIds) {
@@ -204,8 +206,7 @@ public class AddTransactionActivity extends AppCompatActivity {
             transaction.type = finalType;
             transaction.comment = comment;
 
-            // ВИПРАВЛЕНО: Прибрав "/ 1000", бо інакше дата буде зберігатися з помилкою в 1970 рік
-            transaction.date = System.currentTimeMillis();
+            transaction.date = selectedDateMillis;
             transaction.is_from_savings = finalIsFromSavings;
 
             if (finalType.equals("expense")) {
@@ -234,11 +235,18 @@ public class AddTransactionActivity extends AppCompatActivity {
 
     private void showDatePickerDialog() {
         final Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(selectedDateMillis);
+
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 (view, year, month, dayOfMonth) -> {
-                    String selectedDate = String.format(java.util.Locale.getDefault(), "%02d/%02d/%04d", dayOfMonth, month + 1, year);
+                    Calendar selectedCalendar = Calendar.getInstance();
+                    selectedCalendar.set(year, month, dayOfMonth);
+                    selectedDateMillis = selectedCalendar.getTimeInMillis();
+
+                    String selectedDateStr = String.format(java.util.Locale.getDefault(),
+                            "%02d/%02d/%04d", dayOfMonth, month + 1, year);
                     EditText inputDate = findViewById(R.id.inputDate);
-                    inputDate.setText(selectedDate);
+                    inputDate.setText(selectedDateStr);
                 },
                 c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();

@@ -8,4 +8,5 @@
     <color name="red_expense">#F83131</color>
     <color name="green_income">#4CAF50</color>
     <color name="blue_savings">#52ACF2</color>
+    <color name="yellow">#FF9800</color>
 </resources>
