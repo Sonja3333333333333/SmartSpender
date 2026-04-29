@@ -6,12 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.smartspend.ui.adapters.LegendAdapter;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -38,7 +42,7 @@ public class DashboardFragment extends Fragment {
     private View balanceGroup;
     private View emptyDataParent;
     private TextView tvBalanceAmount;
-
+    private RecyclerView rvLegend;
     private TextView tvMonthName;
     private int currentMonthOffset = 0;
 
@@ -100,6 +104,12 @@ public class DashboardFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
             });
+        }
+
+        // Ініціалізація списку легенди
+        rvLegend = view.findViewById(R.id.rv_legend);
+        if (rvLegend != null) {
+            rvLegend.setLayoutManager(new LinearLayoutManager(requireContext()));
         }
     }
 
@@ -172,70 +182,70 @@ public class DashboardFragment extends Fragment {
                 }
             }
 
+
+            List<Map.Entry<String, Double>> sortedExpenses = new ArrayList<>(expenseByCategory.entrySet());
+            // Сортуємо за значенням (Value) від більшого до меншого
+            sortedExpenses.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+
             final double finalBalance = totalIncome - totalExpense;
 
             if (isAdded() && getActivity() != null) {
                 getActivity().runOnUiThread(() -> {
                     tvBalanceAmount.setText(String.format(java.util.Locale.getDefault(), "%.2f ₴", finalBalance));
 
-                    if (currentMonthTransactions == null || currentMonthTransactions.isEmpty()) {
-                        // Якщо взагалі нічого немає за місяць — ховаємо все
+                    if (currentMonthTransactions.isEmpty()) {
                         pieChart.setVisibility(View.GONE);
                         balanceGroup.setVisibility(View.GONE);
                         emptyDataParent.setVisibility(View.VISIBLE);
+                        if (rvLegend != null) rvLegend.setVisibility(View.GONE);
                     } else {
-                        balanceGroup.setVisibility(View.VISIBLE);
                         emptyDataParent.setVisibility(View.GONE);
-
-                        if (expenseByCategory.isEmpty()) {
-                            pieChart.setVisibility(View.GONE);
-                        } else {
-                            pieChart.setVisibility(View.VISIBLE);
-                            setupPieChart(expenseByCategory);
-                        }
+                        balanceGroup.setVisibility(View.VISIBLE);
+                        pieChart.setVisibility(View.VISIBLE);
+                        if (rvLegend != null) rvLegend.setVisibility(View.VISIBLE);
+                        setupPieChart(sortedExpenses);
                     }
                 });
             }
         }).start();
     }
 
-    private void setupPieChart(Map<String, Double> expenseByCategory) {
+    private void setupPieChart(List<Map.Entry<String, Double>> sortedExpenses) {
         ArrayList<PieEntry> entries = new ArrayList<>();
+        int categoryCount = sortedExpenses.size();
 
-        for (Map.Entry<String, Double> entry : expenseByCategory.entrySet()) {
+        // Використовуємо посортований список
+        for (Map.Entry<String, Double> entry : sortedExpenses) {
             entries.add(new PieEntry(entry.getValue().floatValue(), entry.getKey()));
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Витрати");
+        PieDataSet dataSet = new PieDataSet(entries, "");
 
-        int[] colors = {
-                Color.parseColor("#4CAF50"), Color.parseColor("#2196F3"),
-                Color.parseColor("#FFC107"), Color.parseColor("#F44336"),
-                Color.parseColor("#9C27B0"), Color.parseColor("#FF9800")
-        };
-
-        ArrayList<Integer> colorList = new ArrayList<>();
-        for (int color : colors) {
-            colorList.add(color);
+        // Генерація кольорів (динамічна або з масиву)
+        ArrayList<Integer> dynamicColors = new ArrayList<>();
+        for (int i = 0; i < categoryCount; i++) {
+            float hue = (i * 360f) / categoryCount;
+            dynamicColors.add(Color.HSVToColor(new float[]{hue, 0.6f, 0.9f}));
         }
-        dataSet.setColors(colorList);
-
-        dataSet.setValueTextSize(14f);
-
-        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setColors(dynamicColors);
+        dataSet.setDrawValues(false);
 
         PieData data = new PieData(dataSet);
         pieChart.setData(data);
-
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleRadius(50f);
-        pieChart.setTransparentCircleRadius(55f);
-
+        pieChart.setDrawEntryLabels(false);
         pieChart.getLegend().setEnabled(false);
-
-        pieChart.animateY(1000);
-
+        pieChart.getDescription().setEnabled(false);
         pieChart.invalidate();
+
+        List<LegendAdapter.LegendItem> legendItems = new ArrayList<>();
+        for (int i = 0; i < sortedExpenses.size(); i++) {
+            Map.Entry<String, Double> entry = sortedExpenses.get(i);
+            legendItems.add(new LegendAdapter.LegendItem(
+                    entry.getKey(),
+                    entry.getValue(),
+                    dynamicColors.get(i)
+            ));
+        }
+        rvLegend.setAdapter(new LegendAdapter(legendItems));
     }
 }
