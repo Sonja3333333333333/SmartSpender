@@ -16,14 +16,14 @@ public interface CategoryDao {
     void insert(Category category);
 
     // Отримання всіх категорій для відображення у списку/спінері
-    @Query("SELECT * FROM category_table")
+    @Query("SELECT * FROM Category")
     List<Category> getAllCategories();
 
     // Отримання ID категорії за її назвою (важливо для збереження ліміту)
-    @Query("SELECT categoryId FROM category_table WHERE categoryName = :name LIMIT 1")
+    @Query("SELECT id FROM Category WHERE name = :name LIMIT 1")
     int getCategoryIdByName(String name);
 
     // Отримання назви категорії за ID (для відображення в історії)
-    @Query("SELECT categoryName FROM category_table WHERE categoryId = :id LIMIT 1")
+    @Query("SELECT name FROM Category WHERE id = :id LIMIT 1")
     String getCategoryNameById(int id);
 }
