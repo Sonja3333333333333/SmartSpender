@@ -1,10 +1,12 @@
 package com.example.smartspend.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartspend.R;
 import com.example.smartspend.data.BudgetProgressModel;
+import com.example.smartspend.ui.activities.EditLimitActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +70,15 @@ public class LimitsAdapter extends RecyclerView.Adapter<LimitsAdapter.LimitViewH
         }
 
         holder.progressBar.setProgressTintList(tint);
-    } // ТУТ БУЛА ПРОПУЩЕНА ДУЖКА!
+
+        // Обробка кліку на іконку "Олівчика"
+        holder.btnEditLimit.setOnClickListener(v -> {
+            Intent intent = new Intent(context, EditLimitActivity.class);
+            intent.putExtra("CATEGORY_ID", item.categoryId);
+            intent.putExtra("CATEGORY_NAME", item.categoryName);
+            context.startActivity(intent);
+        });
+    }
 
     @Override
     public int getItemCount() {
@@ -77,6 +88,7 @@ public class LimitsAdapter extends RecyclerView.Adapter<LimitsAdapter.LimitViewH
     static class LimitViewHolder extends RecyclerView.ViewHolder {
         TextView tvCategory, tvLimitValue, tvSpentValue;
         ProgressBar progressBar;
+        ImageView btnEditLimit; // Змінено назву на ту, що у твоєму XML
 
         public LimitViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -84,6 +96,8 @@ public class LimitsAdapter extends RecyclerView.Adapter<LimitsAdapter.LimitViewH
             tvLimitValue = itemView.findViewById(R.id.tvLimitValue);
             tvSpentValue = itemView.findViewById(R.id.tvSpentValue);
             progressBar = itemView.findViewById(R.id.pbLimitProgress);
+            // Знаходимо нашу іконку за правильним ID
+            btnEditLimit = itemView.findViewById(R.id.btnEditLimit);
         }
     }
 }

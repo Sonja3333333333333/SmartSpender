@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="Редагувати ліміт"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Поле "Категорія" (тільки для читання) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Категорія"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <!-- Використовуємо TextView замість Spinner, щоб просто показувати категорію -->
+    <TextView
+        android:id="@+id/tvEditCategoryName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:drawable/editbox_background"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:text="Завантаження..."
+        android:textColor="#666666"
+        android:textSize="16sp" />
+
+    <!-- Поле "Сума ліміту" -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Сума ліміту"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etEditLimitAmount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Введіть суму"
+        android:inputType="numberDecimal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="16sp" />
+
+    <!-- Пружина, яка відштовхує кнопки в самий низ -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Панель кнопок (Скасувати / Зберегти) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnCancelEdit"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#E0E0E0"
+            android:text="Скасувати"
+            android:textAllCaps="false"
+            android:textColor="#333333" />
+
+        <Button
+            android:id="@+id/btnSaveEdit"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#4A86F7"
+            android:text="Зберегти"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>
